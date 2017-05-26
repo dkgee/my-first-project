@@ -1,0 +1,609 @@
+
+    Spark架构
+        底层：Spark核心
+        应用层：Spark SQL、Spark Stream、Spark ML & MLlib、GraphX
+
+Big Data Analytics with Spark
+
+ch01 大数据技术全景
+    1,Hadoop
+        HDFS
+        MapReduce
+        Hive
+    2,数据序列化
+        Avro
+        Thrift
+        Protocol Buffers
+        SequenceFile
+    3,列存储(Columnar Storage Format)
+        RCFile
+        ORC
+        Parquet
+    4,消息队列系统
+        Kafka
+        ZeroMQ
+    5,NoSQL
+        HBase
+        Cassandra
+    6,分布式 SQL 查询引擎
+        Impala
+        Presto
+        Apache Drill
+
+ch02 Scala编程
+    1,函数编程
+        函数
+            头等类
+            组合
+            没有副作用
+            简单
+        可变表数据结构
+        一切都是表达式
+     2,Scala基础
+        2.1 开始
+        2.2 基本类型
+        2.3 变量
+        2.4 函数
+                方法
+                局部函数
+                高阶函数
+                函数字面量
+                闭包
+        2.5 类
+        2.6 单例
+        2.7 事件类
+        2.8 正则表达式匹配
+        2.9 运算符
+        2.10 特质
+        2.11 多元组
+        2.12 选项类型(case break)
+        2.13 集合
+                有序集合
+                    数组
+                    列表
+                    向量
+                Sets
+                Map
+                集合类中高阶函数
+                    map
+                    flatMap
+                    filter
+                    foreach
+                    reduce
+
+          参考链接：http://www.cnblogs.com/shishanyuan/p/4699644.html
+ch03 Spark核心
+    3.1 概览
+        核心特征
+            容易使用
+            速度快
+            通用
+            弹性
+            容错性
+         完美架构
+            迭代算法
+            交互式分析
+    3.2 高级体系结构
+        Workers
+        Cluster Managers
+        Driver Programs
+        Executors
+        Tasks
+    3.3 执行程序
+        程序中术语
+        程序如何工作
+    3.4 数据源
+    3.5 API
+        1 Spark上下文
+        2 弹性分布式数据集(RDD)
+            不变性
+            分段性
+            容错性
+            接口
+            类型健壮
+            基于内存
+        3 创建一个RDD
+            并行化(parallelize)
+            文本文件(textFile)
+            全文本文件(wholeTextFile)
+            序列化文件(SequenceFile)
+        4 RDD常见操作
+             转换函数
+                 map
+                 filter
+                 flatMap
+                 mapPartitions
+                 union
+                 intersection
+                 subtract
+                 distinct
+                 cartesian
+                 zip
+                 zipWithIndex
+                 groupBy
+                 keyBy
+                 sortBy
+                 pipe
+                 randomSplit
+                 coalesce
+                 repartition
+                 sample
+             RDD中键值对转换函数
+                 keys
+                 values
+                 mapValues
+                 join
+                 leftOuterJoin
+                 rightOuterJoin
+                 fullOuterJoin
+                 sampleByKey
+                 subtractByKey
+                 groupByKey
+                 reduceByKey
+             Actions函数
+                 collect
+                 count
+                 countByValue
+                 first
+                 max
+                 min
+                 take
+                 takeOrdered
+                 top
+                 fold
+                 reduce
+             RDD中键值对Actions函数
+                countByKey
+                lookup
+             RDD中数值类型的Actions函数
+                mean
+                stdev
+                sum
+                variance
+        5 RDD保存函数
+             保存为文本文件(saveAsTextFile)
+             保存为对象文件(saveAsObjectFile)
+             保存为序列换文件(saveAsSequenceFile)
+    3.6 延迟操作
+        Actions触发计算
+    3.7  缓存
+        RDD缓存方法
+            cache
+            persist
+        RDD缓存容错性
+        内存缓存管理
+    3.8 Spark 工作
+    3.9 共享变量
+        广播变量
+        储蓄器
+
+ch04 Spark Shell交互式数据分析
+    4.1 开始
+        下载
+        抽取
+    4.2 REPL 命令
+    4.3 将Spark Shell作为一个Scala Shell使用
+    4.3 数据分析
+    4.4 日志分析
+
+ch05 开发一个Spark应用程序
+    5.1 Spark中的"Hello World"
+    5.2 编译运行程序
+        sbt
+            编译已定义文件
+            目录结构
+        编译代码
+        运行程序
+    5.3 监测程序
+    5.4 调试程序
+
+ch06 Spark流
+    6.1 Spark流介绍
+        Spark流是Spark的一个副产品
+        高级体系结构
+        数据流来源
+        数据接收
+        数据存储地
+    6.2 流API
+        1 Spark流上下文
+            创建一个Spark流上下文
+            启动流运算
+            核查点
+            停止流运算
+            等待流运算完成
+        2 Spark流应用程序基本结构
+        3 离散流(DStream)
+        4 创建一个离散流
+            基本来源
+                socketTextStream(socket文本流)
+                textFileStream(文本文件流)
+                actorStream(actor流)
+            高级来源
+        5 处理一个数据流
+            基本转换函数
+                map
+                flatMap
+                filter
+                repartition
+                union
+            聚合转换函数
+                count
+                reduce
+                countByValue
+            离散流键值对专有转换函数
+                cogroup
+                join
+                groupByKey
+                reduceByKey
+            特殊转换函数
+                transform
+                updateStateByKey
+        6 输出操作
+            保存至一个文件系统函数
+                saveAsTextFiles(保存为文本文件
+                saveAsObjectFiles(保存为对象文件)
+                saveAsHadoopFiles(保存为Hadoop文件)
+                saveAsNewAPIHadoopFiles(保存为NewAPIHadoop文件)
+            控制台展示函数
+                print
+            保存至数据库函数
+                foreachRDD
+        7 窗口操作
+            window函数
+            countByWindow函数
+            countByValueAndWindow函数
+            reduceByWindow函数
+            reduceByKeyAndWindow函数
+    6.3 一个完整的Spark流程序
+
+ch07 Spark SQL
+    7.1 Spark SQL介绍
+        集成其他Spark库
+        可用性
+        数据源
+        数据处理接口
+        Hive内部操作
+    7.2 性能
+        降低磁盘I/O
+        分区
+        列存储
+        列缓存在内存
+        跳行
+        下推预言
+        优化查询
+    7.3 应用
+        ETL(抽取，转换，加载)
+        数据虚拟化
+        分布式 JDBC/ODBC SQL 查询引擎
+        数据仓库
+    7.4 API
+        1 主要概念
+            SQLContext
+                创建一个SQLContext
+                执行一个SQL查询程序
+            HiveContext
+                创建一个HiveContext
+                执行HiveQL查询程序
+            数据帧
+            行
+        2 创建一个数据帧
+            从RDD中创建一个数据帧
+                toDF
+                createDataFrame
+            从一个数据源创建一个数据帧
+                JSON
+                Parquet
+                ORC
+                Hive
+                JDBC-兼容数据库
+        3 使用SQL/HiveQL处理数据编程
+        4 使用数据帧API处理数据
+            基本操作函数
+                cache
+                columns
+                dtypes
+                explain
+                persist
+                printSchema
+                registerTempTable
+                toDF
+            集成语言查询函数
+                agg
+                apply
+                cube
+                distinct
+                explode
+                filter
+                groupBy
+                intersect
+                join
+                limit
+                orderBy
+                randomSplit
+                rollup
+                sample
+                select
+                selectExpr
+                withColumn
+            RDD操作函数
+                rdd
+                toJSON
+            Actions函数
+                collect
+                count
+                describe
+                first
+                show
+                take
+            输出操作函数
+                write
+        5 保存一个数据帧
+            JSON
+            Parquet
+            ORC
+            Hive
+            JDBC-兼容数据库
+    7.5 内置函数
+        1 Aggregate
+        2 Collection
+        3 Date/Time
+            反转
+            字段抽取
+            日期计算
+            混合运算
+        4 Math
+        5 String
+        6 Window
+    7.6 UDFs 和 UDAFs
+    7.7 交互式样例分析
+    7.8 使用SQL JDBC服务器进行交互式分析
+
+ch08 Spark机器学习
+    8.1 机器学习介绍
+        特征
+            分类特征(范畴特征)
+            数值特征
+        标签
+        模型
+        训练数据
+            标签化
+            非标签化
+        测试数据
+        机器学习应用程序
+            分类
+            回归
+            聚类
+            异态检测
+            推荐
+            降维
+        机器学习算法
+            监督机器学习算法
+                回归算法
+                    线性回归
+                    保序回归
+                    决策树
+                    集成算法
+                分类算法
+                    逻辑回归
+                    支持向量机
+                    朴素贝叶斯
+                    决策树
+                    集成算法
+                    神经网络
+            非监督学习算法
+                k-means
+                主元件分析
+                奇异值分解
+        超参数
+        模型评估
+            曲线面积法
+            F-测量
+            均方根误差
+        机器学习高级步骤
+    8.2 机器学习库
+    8.3 MLlib概览
+         集成其他Spark库
+         统计工具
+         机器学习算法
+    8.4 MLlib API
+        数据类型
+            向量
+                密集向量
+                稀疏向量
+            标记点
+            使用率
+        算法和模型
+            回归算法
+                训练
+                训练回归量
+            回归模型
+                预测
+                保存
+                加载
+                toPMML
+            分类算法
+                训练
+                训练分类
+            分类模型
+                预测
+                保存
+                加载
+                toPMML
+            聚类算法
+                训练
+                运行
+            聚类模型
+                预测
+                计算花费
+                保存
+                加载
+                toPMML
+            推荐算法
+                训练
+                训练预测
+            推荐模型
+                预测
+                推荐产品
+                为用户推荐产品
+                推荐用户
+                为产品推荐用户
+                保存
+                加载
+            模型评估
+                回归指标
+                二进制分类指标
+                多类分类指标
+                多标签分类指标
+                推荐指标
+    8.5 一个MLlib应用程序样例
+        数据集
+        目标
+        代码
+    8.6 Spark ML
+        ML 数据集
+        转换器
+            特征转换器
+            模型
+        评估器
+        管道
+        管道模型
+        计算器
+        表格搜索
+        交叉验证
+    8.7 一个Spark ML应用程序样例
+        数据集
+        目标
+        代码
+
+ch09 使用Spark处理图
+    9.1 图介绍
+        无向图
+        有向图
+        有向多图
+        属性图
+    9.2 GraphX介绍
+    9.3 GraphX API
+        数据概念
+            顶点RDD
+            边
+            边RDD
+            边缘态
+            边上下文
+            图
+        创建一个图
+        图属性
+        图操作
+            属性转换操作函数
+                mapVertices
+                mapEdges
+                mapTriplets
+            结构转换操作函数
+                reverse
+                subgraph
+                mask
+                groupEdges
+            连接操作函数
+                joinVertices
+                outerJoinVertices
+            聚合操作函数
+                aggregateMessages
+            并行图操作函数
+                pregel
+            图算法
+                pageRank
+                staticPageRank
+                connectedComponents
+                stronglyConnectedComponents
+                triangleCount
+
+ch10 集群管理
+    10.1 伪分布集群管理
+        架构
+        安装一个伪分布集群
+            启动集群操作
+            停止集群操作
+            使用脚本启动一个集群
+            使用脚本停止一个集群
+        在伪分布集群上运行一个Spark应用程序
+            客户端模式
+            集群模式
+    10.2 Apache Mesos
+         架构
+         安装一个Mesos集群
+         在Mesos集群上运行一个Spark应用程序
+             部署模式
+             运行模式
+                 Fine-grained 模式
+                 Coarse-grained 模式
+    10.3 YARN
+         架构
+         在YARN集群上运行一个Spark应用程序
+
+ch11 监测
+    11.1 监测伪分布集群
+         监测一个Spark Master
+         监测一个Spark Worker
+    11.2 监测一个Spark应用程序
+         通过应用程序监测启动Jobs
+         监测一个Job的进度
+         监测进度中的任务
+         监测RDD存储
+         监测运行环境
+         监测执行器
+         监测一个Spark流应用程序
+         监测Spark SQL 查询
+         监测Spark SQL JDBC/ODBC 服务器
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

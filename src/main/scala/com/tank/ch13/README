@@ -1,0 +1,20 @@
+
+第13章 包和引用
+    1，模块化风格编程
+    2，反域名习惯(google.com ---- com.google)
+    3，引用包路径,与Javay引入"*"区别是，Scala是下划线"_"
+        import lights.Fruit
+        import lights._
+        import lights.Fruit._
+    4，每个以".scala"为扩展名的文件，默认加载三个引用子句(隐式添加)：
+        import java.lang._
+        import scala._
+        import Predef._
+    5，任何没有标记为private 或 protected 的成员都是公开的。
+    6，保护作用域，更精确的范围保护
+        private[X]  X可以是包，类，单例对象
+        protected[X]
+    7，类的所有权限都对伴生对象开放，反过来也是如此。
+
+
+    总结：

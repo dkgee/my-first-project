@@ -1,0 +1,10 @@
+
+第11章 Scala的层级
+       1，每个类都继承自通用名为Any的超类
+       2，9个基本类型 Byte,Short,Char,Int,Long,Float,Double,Boolean,Unit
+       3，隐式转换
+       4，AnyRef 别名代替java.lang.Object，Scala被设计成可以同时工作在Java和.Net平台上，在.Net平台上，AnyRef是System.Object的别名
+       5，JDK1.5 自动装箱概念
+       6，Java中的"=="判断的只是引用是否相同
+       7，判断Java中两个String是否相等，使用equals方法。
+       8，Nothing是任何其他类型的子类
